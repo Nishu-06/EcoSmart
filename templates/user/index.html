@@ -15,6 +15,7 @@
     <div class="main">
       <div class="navigation">
         <h1>EcoMart</h1>
+        
         <form method="post" action="/search">
           <input
             name="search"
@@ -23,6 +24,7 @@
             class="searchC"
             id="inputField"
           />
+
           <button type="submit" class="searchB"><h2>Search</h2></button>
         </form>
         <div class="right-nav">
@@ -44,7 +46,10 @@
           </div>
         </div>
       </div>
-
+      <div class="calculator-btn">
+        <a href="Carboncalc.html" class="button">Go to Carbon Calculator</a>
+      </div>
+    
       <div class="cat-menu-container">
         {% for category in categories %}
         <button type="button" class="cat-menu">

@@ -7,6 +7,26 @@
   border-radius: 5px;
   background-color: rgb(252, 252, 252);
 }
+.calculator-btn {
+  text-align: center;
+  margin-top: 17px;
+}
+
+.calculator-btn .button {
+  background-color: #4CAF50; /* Green background */
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+}
+
+.calculator-btn .button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
 
 .product-name {
   font-family: Noto Sans;

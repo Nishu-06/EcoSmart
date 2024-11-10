@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSmart Product Carbon Footprint Calculator</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7fb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background-color: #fff;
+            width: 100%;
+            max-width: 900px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #4CAF50;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* Flexbox layout for the input grid */
+        .input-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            flex: 0 0 48%;
+            text-align: left;
+        }
+
+        label {
+            font-size: 1rem;
+            color: #555;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: border-color 0.3s ease-in-out;
+            outline: none;
+        }
+
+        input[type="number"]:focus {
+            border-color: #4CAF50;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1.2rem;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            font-size: 1.1rem;
+            margin-top: 30px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .chart-container {
+            margin-top: 40px;
+            position: relative;
+            width: 100%;
+            height: 400px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 12px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .breakdown {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .breakdown div {
+            margin-bottom: 8px;
+        }
+
+        #review {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        #review.good {
+            color: green;
+        }
+
+        #review.bad {
+            color: red;
+        }
+
+        #review.neutral {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Eco-Friendly Product Carbon Footprint Calculator</h1>
+    
+    <!-- Input grid for product categories -->
+    <div class="input-grid">
+        <div class="input-group">
+            <label for="reusableStraws">Reusable Straws:</label>
+            <input type="number" id="reusableStraws" value="0" min="0">
+        </div>
+        <div class="input-group">
+            <label for="ecoBags">Eco-Friendly Bags:</label>
+            <input type="number" id="ecoBags" value="0" min="0">
+        </div>
+        <div class="input-group">
+            <label for="organicShirts">Organic Cotton T-Shirts:</label>
+            <input type="number" id="organicShirts" value="0" min="0">
+        </div>
+        <div class="input-group">
+            <label for="bambooSunglasses">Bamboo Sunglasses:</label>
+            <input type="number" id="bambooSunglasses" value="0" min="0">
+        </div>
+        <div class="input-group">
+            <label for="waterBottles">Reusable Water Bottles:</label>
+            <input type="number" id="waterBottles" value="0" min="0">
+        </div>
+        <div class="input-group">
+            <label for="ledBulbs">LED Bulbs:</label>
+            <input type="number" id="ledBulbs" value="0" min="0">
+        </div>
+        <div class="input-group">
+            <label for="reusableCups">Reusable Coffee Cups:</label>
+            <input type="number" id="reusableCups" value="0" min="0">
+        </div>
+        <div class="input-group">
+            <label for="compostBins">Compost Bins:</label>
+            <input type="number" id="compostBins" value="0" min="0">
+        </div>
+        <div class="input-group">
+            <label for="sustainableShirts">Sustainable T-Shirts:</label>
+            <input type="number" id="sustainableShirts" value="0" min="0">
+        </div>
+        <div class="input-group">
+            <label for="bambooToothbrush">Bamboo Toothbrushes:</label>
+            <input type="number" id="bambooToothbrush" value="0" min="0">
+        </div>
+        <div class="input-group">
+            <label for="beeswaxWraps">Beeswax Wraps:</label>
+            <input type="number" id="beeswaxWraps" value="0" min="0">
+        </div>
+        <div class="input-group">
+            <label for="solarChargers">Solar Chargers:</label>
+            <input type="number" id="solarChargers" value="0" min="0">
+        </div>
+        <div class="input-group">
+            <label for="bambooTowels">Bamboo Towels:</label>
+            <input type="number" id="bambooTowels" value="0" min="0">
+        </div>
+    </div>
+
+    <button onclick="calculateFootprint()">Calculate Carbon Footprint</button>
+    
+    <div id="result"></div>
+
+    <div class="chart-container">
+        <canvas id="carbonFootprintChart" width="400" height="200"></canvas>
+    </div>
+
+    <div class="breakdown" id="breakdown"></div>
+    
+    <div id="review"></div>
+</div>
+
+<script>
+    function calculateFootprint() {
+        // Get the quantity of each product
+        const reusableStrawsQty = parseInt(document.getElementById("reusableStraws").value);
+        const ecoBagsQty = parseInt(document.getElementById("ecoBags").value);
+        const organicShirtsQty = parseInt(document.getElementById("organicShirts").value);
+        const bambooSunglassesQty = parseInt(document.getElementById("bambooSunglasses").value);
+        const waterBottlesQty = parseInt(document.getElementById("waterBottles").value);
+        const ledBulbsQty = parseInt(document.getElementById("ledBulbs").value);
+
+        // Additional products
+        const reusableCupsQty = parseInt(document.getElementById("reusableCups").value);
+        const compostBinsQty = parseInt(document.getElementById("compostBins").value);
+        const sustainableShirtsQty = parseInt(document.getElementById("sustainableShirts").value);
+        const bambooToothbrushQty = parseInt(document.getElementById("bambooToothbrush").value);
+        const beeswaxWrapsQty = parseInt(document.getElementById("beeswaxWraps").value);
+        const solarChargersQty = parseInt(document.getElementById("solarChargers").value);
+        const bambooTowelsQty = parseInt(document.getElementById("bambooTowels").value);
+
+        // Define the carbon footprint per product (in kg CO₂)
+        const reusableStrawsFootprint = 0.1;
+        const ecoBagsFootprint = 1;
+        const organicShirtsFootprint = 5;
+        const bambooSunglassesFootprint = 0.3;
+        const waterBottlesFootprint = 0.5;
+        const ledBulbsSavings = -0.9;
+        const reusableCupsFootprint = 0.3;
+        const compostBinsFootprint = 1.5;
+        const sustainableShirtsFootprint = 4;
+        const bambooToothbrushFootprint = 0.2;
+        const beeswaxWrapsFootprint = 0.1;
+        const solarChargersFootprint = -1.5;
+        const bambooTowelsFootprint = 0.6;
+
+        // Initialize total carbon footprint
+        let totalFootprint = 0;
+
+        // Breakdown storage for non-zero quantities
+        let breakdownText = `<h3>Carbon Footprint Breakdown:</h3>`;
+
+        // Add the footprint for products with quantity > 0
+        const products = [
+            { name: 'Reusable Straws', qty: reusableStrawsQty, footprint: reusableStrawsFootprint },
+            { name: 'Eco-Friendly Bags', qty: ecoBagsQty, footprint: ecoBagsFootprint },
+            { name: 'Organic T-Shirts', qty: organicShirtsQty, footprint: organicShirtsFootprint },
+            { name: 'Bamboo Sunglasses', qty: bambooSunglassesQty, footprint: bambooSunglassesFootprint },
+            { name: 'Reusable Water Bottles', qty: waterBottlesQty, footprint: waterBottlesFootprint },
+            { name: 'LED Bulbs', qty: ledBulbsQty, footprint: ledBulbsSavings },
+            { name: 'Reusable Coffee Cups', qty: reusableCupsQty, footprint: reusableCupsFootprint },
+            { name: 'Compost Bins', qty: compostBinsQty, footprint: compostBinsFootprint },
+            { name: 'Sustainable T-Shirts', qty: sustainableShirtsQty, footprint: sustainableShirtsFootprint },
+            { name: 'Bamboo Toothbrushes', qty: bambooToothbrushQty, footprint: bambooToothbrushFootprint },
+            { name: 'Beeswax Wraps', qty: beeswaxWrapsQty, footprint: beeswaxWrapsFootprint },
+            { name: 'Solar Chargers', qty: solarChargersQty, footprint: solarChargersFootprint },
+            { name: 'Bamboo Towels', qty: bambooTowelsQty, footprint: bambooTowelsFootprint }
+        ];
+
+        // Filter out products with zero quantity and calculate their total footprint
+        const labels = [];
+        const data = [];
+
+        const colors = [
+            'rgba(76, 175, 80, 0.7)', // Green
+            'rgba(33, 150, 243, 0.7)', // Blue
+            'rgba(255, 193, 7, 0.7)', // Yellow
+            'rgba(255, 87, 34, 0.7)', // Red
+            'rgba(156, 39, 176, 0.7)', // Purple
+            'rgba(0, 188, 212, 0.7)', // Cyan
+            'rgba(255, 64, 129, 0.7)', // Pink
+            'rgba(96, 125, 139, 0.7)', // Grey
+            'rgba(255, 152, 0, 0.7)', // Orange
+            'rgba(0, 150, 136, 0.7)'  // Teal
+        ];
+
+        products.forEach((product, index) => {
+            if (product.qty > 0) {
+                const footprint = product.qty * product.footprint;
+                totalFootprint += footprint;
+                breakdownText += `<div>${product.name}: ${footprint.toFixed(2)} kg CO₂</div>`;
+                labels.push(product.name);
+                data.push(footprint);
+            }
+        });
+
+        // Display total carbon footprint
+        const resultText = `Total Carbon Footprint: ${totalFootprint.toFixed(2)} kg CO₂`;
+        document.getElementById("result").innerHTML = resultText;
+
+        // Display the breakdown
+        document.getElementById("breakdown").innerHTML = breakdownText;
+
+        // Create the chart with colorful bars
+        const ctx = document.getElementById('carbonFootprintChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Carbon Footprint (kg CO₂)',
+                    data: data,
+                    backgroundColor: data.map((_, i) => colors[i % colors.length]), // Assign colors dynamically
+                    borderColor: data.map((_, i) => colors[i % colors.length]), // Border colors
+                    borderWidth: 1
+                }]
+            }
+        });
+
+        // Review text based on total footprint
+        let reviewText = '';
+        if (totalFootprint <= 10) {
+            reviewText = 'Good job! Your eco-friendly choices are helping reduce your carbon footprint!';
+            document.getElementById("review").className = "good";
+        } else if (totalFootprint <= 50) {
+            reviewText = 'Your carbon footprint is moderate. Keep going, and consider more eco-friendly options!';
+            document.getElementById("review").className = "neutral";
+        } else {
+            reviewText = 'You have room for improvement! Try to focus on sustainable and carbon-saving products.';
+            document.getElementById("review").className = "bad";
+        }
+        document.getElementById("review").innerHTML = reviewText;
+    }
+</script>
+
+
+</body>
+</html>
