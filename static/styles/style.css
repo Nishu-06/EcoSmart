@@ -8,24 +8,24 @@
   background-color: rgb(252, 252, 252);
 }
 .calculator-btn {
-  text-align: center;
-  margin-top: 17px;
+  padding-top: 20px; /* Adds some space above the button */
+  text-align: center; /* Centers the button within the div */
 }
 
-.calculator-btn .button {
-  background-color: #4CAF50; /* Green background */
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
+.calculator-btn a {
   display: inline-block;
-  font-size: 16px;
-  border-radius: 5px;
-  border: none;
+  padding: 10px 20px; /* Adds padding inside the button */
+  background-color: green; /* Sets the background color */
+  color: white; /* Text color */
+  font-weight: bold; /* Makes the text bold */
+  text-decoration: none; /* Removes the underline */
+  border-radius: 5px; /* Rounds the button corners */
+  transition: transform 0.2s ease, background-color 0.2s ease; /* Smooth transition for hover effect */
 }
 
-.calculator-btn .button:hover {
-  background-color: #45a049; /* Darker green on hover */
+.calculator-btn a:hover {
+  transform: scale(1.05); /* Slightly enlarges the button on hover */
+  background-color: darkgreen; /* Darkens the color on hover */
 }
 
 .product-name {
@@ -38,6 +38,52 @@
   align-items: center;
   justify-content: space-between;
 }
+
+/* Styling for Category, Cart, and Admin (Hover Scaling Effect) */
+.cat-menu-container .cat-menu, 
+.add-to-cart, 
+.dropdown:hover .dropdown-content, 
+.my-name, 
+.cat-card {
+  transition: transform 0.3s ease, background-color 0.2s ease; /* Smooth scaling transition */
+}
+
+.cat-menu-container .cat-menu:hover, 
+.add-to-cart:hover, 
+.dropdown:hover .dropdown-content:hover, 
+.my-name:hover, 
+.cat-card:hover {
+  transform: scale(1.1); /* Scale up the element on hover */
+  background-color: #f0f0f0; /* Change background color on hover (optional) */
+}
+
+/* Add this to ensure the categories hold the hover effect */
+.cat-menu-container .cat-menu {
+  transition: transform 0.3s ease;
+}
+
+.cat-menu-container .cat-menu:hover {
+  transform: scale(1.1); /* Scales up when hovered */
+}
+
+/* Optional: For smoother hover effects on the admin section or other items like My Name or Cart */
+.add-to-cart:hover {
+  background-color: #36cc36;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+/* If you'd like to apply the effect on the dropdown content (admin section) */
+.dropdown-content {
+  transition: transform 0.3s ease;
+}
+
+.dropdown-content:hover {
+  transform: scale(1.1); /* Scales up the dropdown content */
+  background-color: #f7f7f7;
+}
+
+
 
 .my-name {
   cursor: pointer;
