@@ -10,10 +10,6 @@
 
 ---
 
-## 🔗 Live Demo
-[Click Here to View](https://your-ecosmart-live-demo-link.com)
-
----
 
 ## 🚀 Features
 - 🛒 **Product Browsing & Dynamic Filtering** – Find eco-friendly products by category, price, or sustainability rating.
@@ -42,3 +38,4 @@
 ```bash
 git clone https://github.com/Nishu-06/EcoSmart.git
 cd EcoSmart
+
